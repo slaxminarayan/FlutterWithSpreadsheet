@@ -1,0 +1,20 @@
+function doGet(request){
+    // Open Google Sheet using ID
+    var sheet = SpreadsheetApp.openById("1NgQhrE4q4LtBXJhpxdehTntkx9K1Vy4bCq-9wspW3uo");
+    var result = {"status": "SUCCESS"};
+	
+    try{
+        // Get all Parameters
+        var name = request.parameter.name;
+        var email = request.parameter.email;
+        var mobileNo = request.parameter.mobileNo;
+       
+
+        // Append data on Google Sheet
+        var rowData = sheet.appendRow([name, email, mobileNo]);  
+
+    }catch(exc){
+        // If error occurs, throw exception
+        result = {"status": "FAILED", "message": exc};
+    }
+}
